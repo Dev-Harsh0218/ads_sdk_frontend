@@ -1,0 +1,44 @@
+#new structure to be followed some things are demo here for now like Button and stuff
+#but more or less we have to follow this structure after the design is realised
+
+src/
+├── assets/
+│   ├── images/
+│   ├── fonts/
+│   └── icons/
+├── components/
+│   ├── common/
+│   │   ├── Button/
+│   │   │   ├── Button.js
+│   │   │   ├── Button.test.js
+│   │   │   └── Button.css
+│   │   └── Input/
+├── features/
+│   ├── auth/
+│   │   ├── components/
+│   │   ├── services/
+│   │   └── hooks/
+│   └── ads/
+├── layouts/
+│   ├── MainLayout.js
+│   └── AuthLayout.js
+├── services/
+│   ├── api.js
+│   └── auth.js
+├── hooks/
+│   └── useAuth.js
+├── utils/
+│   ├── helpers.js
+│   └── validators.js
+├── constants/
+│   └── index.js
+├── config/
+│   └── routes.js
+├── styles/
+│   ├── global.css
+│   └── variables.css
+├── store/
+│   └── index.js
+├── App.js
+└── index.js
+

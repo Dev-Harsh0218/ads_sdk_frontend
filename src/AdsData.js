@@ -2,10 +2,10 @@ import React, { useEffect, useState, useCallback, memo } from "react";
 import { serverUrl } from "./const";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-hot-toast";
+import { useNavigate} from "react-router-dom";
 
 const AdsData = memo(({ refresh }) => {
   const [adsListData, setAdsListData] = useState([]);
-
   /**
    * Fetches the data for all running ads from the server and updates the `adsListData` state.
    *
