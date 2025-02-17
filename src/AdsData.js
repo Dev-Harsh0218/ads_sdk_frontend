@@ -2,15 +2,17 @@ import React, { useEffect, useState, useCallback, memo } from "react";
 import { serverUrl } from "./const";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-hot-toast";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AdsData = memo(({ refresh }) => {
+  const navigate = useNavigate();
   const [adsListData, setAdsListData] = useState([]);
   /**
    * Fetches the data for all running ads from the server and updates the `adsListData` state.
    *
    * This function is memoized using `useCallback` to avoid unnecessary re-fetching of data.
    */
+
   const fetchAdsData = useCallback(async () => {
     try {
       const response = await fetch(
@@ -46,29 +48,32 @@ const AdsData = memo(({ refresh }) => {
    * @param{string} running_ad_id - The ID of the running ad to be deleted. inside the body of the request
    * @returns {Promise<void>} - A Promise that resolves when the ad is successfully deleted, or rejects with an error.
    */
-  const handleDelete = useCallback(async (running_ad_id) => {
-    try {
-      const response = await fetch(
-        `http://${serverUrl}/api/v1/run-ads/delete-running-ad`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ id: running_ad_id }),
+  const handleDelete = useCallback(
+    async (running_ad_id) => {
+      try {
+        const response = await fetch(
+          `http://${serverUrl}/api/v1/run-ads/delete-running-ad`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id: running_ad_id }),
+          }
+        );
+        const data = await response.json();
+        if (data.message === "Ad deactivated successfully") {
+          toast.success("Ad Deactivated successfully");
+          fetchAdsData();
+        } else {
+          console.error("Error deleting ad item:", data);
         }
-      );
-      const data = await response.json();
-      if (data.message === "Ad deactivated successfully") {
-        toast.success("Ad Deactivated successfully");
-        fetchAdsData();
-      } else {
-        console.error("Error deleting ad item:", data);
+      } catch (error) {
+        console.error("Error:", error);
       }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  }, [fetchAdsData]);
+    },
+    [fetchAdsData]
+  );
 
   const trimExtension = useCallback((str) => {
     const lastDotIndex = str.lastIndexOf(".");
@@ -78,22 +83,48 @@ const AdsData = memo(({ refresh }) => {
   const AdImage = memo(({ path }) => (
     <div className="w-10 bg-black">
       <div className="flex items-center justify-center hover:scale-150 transition-transform transform-gpu duration-300">
-        <a href={`http://${serverUrl}/images/${path}`} target="_blank" rel="noopener noreferrer">
-          <img src={`http://${serverUrl}/images/${path}`} alt="Ad" loading="lazy" />
+        <a
+          href={`http://${serverUrl}/images/${path}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src={`http://${serverUrl}/images/${path}`}
+            alt="Ad"
+            loading="lazy"
+          />
         </a>
       </div>
     </div>
   ));
 
+  const handleGetDetailClick = (e) => {
+    e.preventDefault();
+    navigate("/detailed-analytics");
+  };
+
   return (
-    <div className="w-full flex flex-col items-center justify-center">
-      <h1 className="text-2xl font-bold text-[#252525] mb-[3%]">Ads Sdk data</h1>
+    <div className="w-full flex flex-col items-center justify-center mt-10">
+      <div className="w-11/12 grid grid-cols-3 items-center mb-4">
+        <h1 className="text-2xl font-bold text-[#252525] col-start-2 text-center">
+          Ads Sdk data
+        </h1>
+        <button
+          onClick={handleGetDetailClick}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center gap-2 justify-self-end"
+        >
+          Get Detailed Analytics
+        </button>
+      </div>
+
       <div className="w-full max-w-[90%]">
         <table className="w-full">
           <thead>
             <tr>
               <th className="text-center">Apk Unique Key</th>
+              <th className="text-center">SDK Type</th>
               <th className="text-left">redirection_link</th>
+              <th className="text-left">Ad Type</th>
               <th className="text-left">Ads Image</th>
               <th className="text-center">preview</th>
               <th className="text-center">Total Impressions</th>
@@ -101,16 +132,19 @@ const AdsData = memo(({ refresh }) => {
             </tr>
           </thead>
           <tbody>
-            {adsListData.map((dataItem,index) => (
+            {adsListData.map((dataItem, index) => (
               <tr
                 key={index}
                 className={`w-[80%] ${
                   index % 2 === 0 ? "bg-[#E0F1FB]" : "bg-white"
-                }`}>
+                }`}
+              >
                 <td className="text-center">
                   {dataItem.Registered_apk_key.app_name}
                 </td>
+                <td className="text-left">{dataItem.Registered_apk_key.sdk_type}</td>
                 <td className="text-left">{dataItem.Ad.app_link}</td>
+                <td className="text-left">{dataItem.Ad.ad_type}</td>
                 <td className="text-left">
                   {trimExtension(dataItem.Ad.ad_asset_path)}
                 </td>

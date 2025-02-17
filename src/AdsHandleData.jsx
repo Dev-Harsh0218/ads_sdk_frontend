@@ -22,6 +22,7 @@ const AddAdsHandleData = ({hardRefresh}) => {
     setRefreshAdsImages((prev) => prev + 1);
   };
   
+  console.log(suggestions)
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -197,7 +198,12 @@ const AddAdsHandleData = ({hardRefresh}) => {
                       className={`px-4 py-2 min-h-28 cursor-pointer ${index % 2 === 0 ? "bg-[#E0F1FB]" : "bg-white"} hover:bg-gray-200 border-b border-[#CFE1EE] border-1 flex items-center justify-between`}
                       onClick={() => handleSuggestionClick(suggestion)}
                     >
+                      <div className="">
                       <div className="">{suggestion.ad_asset_path}</div>
+                      <div className="">
+                        ad_type :  
+                        {suggestion.ad_type}</div>
+                      </div>
                       <div className="image-preview w-10">
                         <img
                           src={`http://${serverUrl}/images/${suggestion.ad_asset_path}`}

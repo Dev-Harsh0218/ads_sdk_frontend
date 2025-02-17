@@ -6,20 +6,25 @@ import { useNavigate } from 'react-router-dom';
 const BulkImageUpload = () => {
     const navigate = useNavigate();
     const adsDataList = [
-      [false, 'com.as.speakercleaner-2.png', 'https://play.google.com/store/apps/details?id=com.as.speakercleaner&hl=en-IN'],
-      [false, 'com.as.speakercleaner.png', 'https://play.google.com/store/apps/details?id=com.as.speakercleaner&hl=en-IN'],
-      [true, 'com.clock.sandtimer-1.png', 'https://play.google.com/store/apps/details?id=com.clock.sandtimer&hl=en-IN'],
-      [true, 'com.clock.sandtimer.png', 'https://play.google.com/store/apps/details?id=com.clock.sandtimer&hl=en-IN'],
-      [false, 'com.meditation.medit7-1.png', 'https://play.google.com/store/apps/details?id=com.meditation.medit8&hl=en-IN'],
-      [false, 'com.meditation.medit7-2.png', 'https://play.google.com/store/apps/details?id=com.meditation.medit8&hl=en-IN'],
+      ["Interstitial", 'com.as.speakercleaner-2.png', 'https://play.google.com/store/apps/details?id=com.as.speakercleaner&hl=en-IN'],
+      ["Popup", 'speakerCleaner_popup.png', 'https://play.google.com/store/apps/details?id=com.as.speakercleaner&hl=en-IN'],
+      ["Interstitial", 'com.as.speakercleaner.png', 'https://play.google.com/store/apps/details?id=com.as.speakercleaner&hl=en-IN'],
+      ["Interstitial", 'com.clock.sandtimer-1.png', 'https://play.google.com/store/apps/details?id=com.clock.sandtimer&hl=en-IN'],
+      ["Interstitial", 'com.clock.sandtimer.png', 'https://play.google.com/store/apps/details?id=com.clock.sandtimer&hl=en-IN'],
+      ["Interstitial", 'com.meditation.medit7-1.png', 'https://play.google.com/store/apps/details?id=com.meditation.medit8&hl=en-IN'],
+      ["Interstitial", 'com.meditation.medit7-2.png', 'https://play.google.com/store/apps/details?id=com.meditation.medit8&hl=en-IN'],
       // [false, 'com.walli.hd.wallpapervideo.mp3', 'https://play.google.com/store/apps/details?id=com.walli.hd.wallpaper&hl=en-IN'],
       // [false, 'commeditationmedit7video.mp4', 'https://play.google.com/store/apps/details?id=com.walli.hd.wallpaper&hl=en-IN'],
-      [false, 'com.meditation.medit7.png', 'https://play.google.com/store/apps/details?id=com.meditation.medit8&hl=en-IN'],
-      [false, 'com.music.focusflow-2.png', 'https://play.google.com/store/apps/details?id=com.music.focusflow&hl=en-IN'],
-      [false, 'com.music.focusflow.png', 'https://play.google.com/store/apps/details?id=com.music.focusflow&hl=en-IN'],
-      [true, 'com.walli.hd.wallpaper0.png', 'https://play.google.com/store/apps/details?id=com.walli.hd.wallpaper&hl=en-IN'],
-      [true, 'com.walli.hd.wallpaper1.png', 'https://play.google.com/store/apps/details?id=com.walli.hd.wallpaper&hl=en-IN'],
-      [true, 'com.walli.hd.wallpaper2.png', 'https://play.google.com/store/apps/details?id=com.walli.hd.wallpaper&hl=en-IN']
+      ["Banner", 'medit8_banner_ad.png', 'https://play.google.com/store/apps/details?id=com.meditation.medit8&hl=en-IN'],
+      ["Interstitial", 'com.meditation.medit7.png', 'https://play.google.com/store/apps/details?id=com.meditation.medit8&hl=en-IN'],
+      ["Interstitial", 'com.music.focusflow-2.png', 'https://play.google.com/store/apps/details?id=com.music.focusflow&hl=en-IN'],
+      ["Popup", 'medit8_popup.png', 'https://play.google.com/store/apps/details?id=com.music.focusflow&hl=en-IN'],
+      ["Interstitial", 'com.music.focusflow.png', 'https://play.google.com/store/apps/details?id=com.music.focusflow&hl=en-IN'],
+      ["Popup", 'walli_popup.png', 'https://play.google.com/store/apps/details?id=com.walli.hd.wallpaper&hl=en-IN'],
+      ["Interstitial", 'com.walli.hd.wallpaper0.png', 'https://play.google.com/store/apps/details?id=com.walli.hd.wallpaper&hl=en-IN'],
+      ["Banner", 'walli_banner_ad.png', 'https://play.google.com/store/apps/details?id=com.walli.hd.wallpaper&hl=en-IN'],
+      ["Interstitial", 'com.walli.hd.wallpaper1.png', 'https://play.google.com/store/apps/details?id=com.walli.hd.wallpaper&hl=en-IN'],
+      ["Interstitial", 'com.walli.hd.wallpaper2.png', 'https://play.google.com/store/apps/details?id=com.walli.hd.wallpaper&hl=en-IN']
   ];
 
   const handleUpload = async () => {
